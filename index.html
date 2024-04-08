@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookSwap</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+    <!-- Script Links -->
+    <script src="app.js"></script>
+    <script src="aKey.js"></script>
+
+</head>
+<body>
+    <ion-app>
+        <ion-header>
+            <ion-toolbar color="danger">
+                <ion-title>BookSwap</ion-title>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title></ion-card-title>
+                </ion-card-header>
+
+                <ion-list><!-- Allows user to search for books-->
+                    <ion-item>
+                        <ion-input label="Search for a book title" label-placement="floating" id="inputBookTitle"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-grid>
+                            <ion-row>
+                              <ion-col></ion-col>
+                              <ion-col>
+                                <ion-button id="btn-book-searches">Find Relevant Books</ion-button>
+                              </ion-col>
+                              <ion-col></ion-col>
+                            </ion-row>
+                          </ion-grid>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+
+            <ion-card> Results </ion-card>
+        </ion-content>
+
+    </ion-app>
+</body>
