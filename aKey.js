@@ -1,1 +1,1 @@
-const apiKEy = 'AIzaSyBJnOzUW_1QNdnQX8PG6e-nEzH8xKsAhPk';
+/* api key beign used was expesosed, ehich could threaten google */
