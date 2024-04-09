@@ -14,6 +14,7 @@ function getBooks(){
 
 async function getResults(){
     const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookTerm}`;
+    console.log(bookTerm);
     
     try {
         const response = await fetch(apiURL);
@@ -32,7 +33,7 @@ async function updateDisplay(jsonObj){
 
     try {
         const data = jsonObj;
-        //console.log(jsonObj);
+        console.log(jsonObj);
     } catch (error) {
         reportError(error);
     }
