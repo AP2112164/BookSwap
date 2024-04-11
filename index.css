@@ -1,0 +1,13 @@
+/* for getting the pages to go fullscreen when using tabs*/
+.page-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+.pagehome{
+    width: auto;
+    height: 100%;
+}
+

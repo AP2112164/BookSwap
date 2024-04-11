@@ -10,43 +10,192 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
     <!-- Script Links -->
     <script src="app.js"></script>
-    <script src="aKey.js"></script>
+    <link rel="stylesheet" href="index.css"/>
+    <!-- <script src="aKey.js"></script> -->
 
 </head>
 <body>
     <ion-app>
-        <ion-header>
-            <ion-toolbar color="danger">
-                <ion-title>BookSwap</ion-title>
-            </ion-toolbar>
-        </ion-header>
+        <ion-tabs>
+            <!-- APEARANCE OF HOMEPAGE-->
+            <ion-tab tab="Home">
+                <ion-nav id="home-nav"></ion-nav>
+                <div id="homePage">
+                    <ion-header>
+                        <ion-toolbar color="danger">
+                            <ion-title>BookSwap</ion-title>
+                        </ion-toolbar>
+                    </ion-header>
+            
+                    <ion-content class="page-content" fullscreen="true">
+                        <ion-card> <!-- User Search Area -->
+                            <ion-card-header>
+                                <ion-card-title>Search for Books</ion-card-title>
+                            </ion-card-header>
+            
+                            <ion-list><!-- Allows user to search for books-->
+                                <ion-item>
+                                    <ion-input label="Search for a book title" label-placement="floating" id="inputBookTitle"></ion-input>
+                                    <ion-button id="btnGetBooks"> Search </ion-button>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-button id="saveSearch"> Save Input </ion-button>
+                                </ion-item>
+                        
+                            </ion-list>
+                        </ion-card>
+            <!-- - - - - - - - - - - - - - - - - - -->
+                        <ion-card> <!-- Area for displaying results -->
+                            <ion-card-content>
+                                <ion-list>
+                                    <ion-item>
+                                        <ion-label> Results : </ion-label>
+                                        <ion-label id="result-found"></ion-label><!-- these would show how many books matching the user's input were generated-->
+                                    </ion-item>
+                                    <ion-item><!-- this is to show what should have generated here when the user would enter a book name-->
+                                        <ion-thumbnail slot="start">
+                                            <!-- image of book cover would go here -->
+                                        </ion-thumbnail>
+                                        <ion-label>
+                                            <h2>Harry Potter and the Philospher's Stone</h2>
+                                            <h3>J.K. Rowling</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                    <ion-item><!-- this is to show what should have generated here when the user would enter a book name-->
+                                        <ion-thumbnail slot="start">
+                                            <!-- image of book cover would go here -->
+                                        </ion-thumbnail>
+                                        <ion-label>
+                                            <h2>Harry Potter and the Sorcerer's Stone</h2>
+                                            <h3>J.K. Rowling</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                    <ion-item><!-- this is to show what should have generated here when the user would enter a book name-->
+                                        <ion-thumbnail slot="start">
+                                            <!-- image of book cover would go here -->
+                                        </ion-thumbnail>
+                                        <ion-label>
+                                            <h2>Harry Potter and the Chamber of Secrets</h2>
+                                            <h3>J.K. Rowling</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-card-content>
+                            <ion-nav root="book-results"></ion-nav>
+                        </ion-card>
+                    </ion-content>
+                </div>
+            </ion-tab>
+            <!-- - - - - - - - - - - - - --->
+            <!-- APEARANCE OF BOOK PAGE, WHICH IS TO SHOW HOW THE VIEWING WINDOW WOULD HAVE WORKED IF IT WAS FUNCTIONAL-->
+            <ion-tab tab="Book">
+                <ion-nav id="book-nav"></ion-nav>
+                <div id="bookPage">
+                    <ion-header>
+                        <ion-toolbar color="danger">
+                            <ion-title>Book Viewer</ion-title>
+                        </ion-toolbar>
+                    </ion-header>
 
-        <ion-content>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title></ion-card-title>
-                </ion-card-header>
+                    <ion-content class="page-content" fullscreen="true">
+                        <ion-card>
+                            <ion-card-content>
+                                <ion-list>
+                                    <ion-item>
+                                        <ion-thumbnail>
+                                            <!-- cover of book would be stored here-->
+                                        </ion-thumbnail>
+                                    </ion-item>
+                                    <ion-item>
+                                        <ion-label>
+                                            <h2>Harry Potter and the Sorcerer's Stone</h2>
+                                            <h3>J.K. Rowling</h3>
+                                            <h3>Children</h3>
+                                            <h3>Mr and Mrs Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much.</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                    <ion-item>
+                                        <ion-grid>
+                                            <ion-row>
+                                              <ion-col></ion-col>
+                                              <ion-col>
+                                                <ion-button id="saveBook"> Save Book </ion-button>
+                                              </ion-col>
+                                              <ion-col></ion-col>
+                                            </ion-row>
+                                        </ion-grid>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-content>
+                </div>
+            </ion-tab>
+            <!-- - - - - - - - - - - - - --->
+            <!-- APEARANCE OF SHELF PAGE, WHERE FAVOURITE BOOKS ARE STORED-->
+            <ion-tab tab="Shelf">
+                <ion-nav id="shelf-nav"></ion-nav>
+                <div id="shelfPage">
+                    <ion-header>
+                        <ion-toolbar color="danger">
+                            <ion-title>My Shelf</ion-title>
+                        </ion-toolbar>
+                    </ion-header>
 
-                <ion-list><!-- Allows user to search for books-->
-                    <ion-item>
-                        <ion-input label="Search for a book title" label-placement="floating" id="inputBookTitle"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-grid>
-                            <ion-row>
-                              <ion-col></ion-col>
-                              <ion-col>
-                                <ion-button id="btn-book-searches">Find Relevant Books</ion-button>
-                              </ion-col>
-                              <ion-col></ion-col>
-                            </ion-row>
-                          </ion-grid>
-                    </ion-item>
-                </ion-list>
-            </ion-card>
-
-            <ion-card> Results </ion-card>
-        </ion-content>
-
+                    <ion-content class="page-content" fullscreen="true">
+                        <ion-card>
+                            <ion-card-content>
+                                <ion-list>
+                                    <ion-item>
+                                        <ion-label> Books Saved : 3 </ion-label>
+                                        <ion-label id="bookSavedCounter"></ion-label><!-- count will increase for everybook saved--> 
+                                    </ion-item>
+                                
+                                    <ion-item><!-- holds the details of a book that was saved-->
+                                        <ion-thumbnail slot="start">
+                                            <!-- image of book cover would go here -->
+                                        </ion-thumbnail>
+                                        <ion-label>
+                                            <h2>Journey to the Centre of the Earth</h2>
+                                            <h3>Jules Verne</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                    <ion-item><!-- holds the details of a book that was saved-->
+                                        <ion-thumbnail slot="start">
+                                            <!-- image of book cover would go here -->
+                                        </ion-thumbnail>
+                                        <ion-label>
+                                            <h2>Jurrassic Park</h2>
+                                            <h3>Michael Crichton</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                    <ion-item><!-- holds the details of a book that was saved-->
+                                        <ion-thumbnail slot="start">
+                                            <!-- image of book cover would go here -->
+                                        </ion-thumbnail>
+                                        <ion-label>
+                                            <h2>The Beach</h2>
+                                            <h3>Alex Garland</h3>
+                                        </ion-label>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-content>
+                </div>
+            </ion-tab>
+            <!-- bottom tab navigation -->
+            <ion-tab-bar slot="bottom" color="danger">
+                <ion-tab-button tab="Home">
+                    <h5>Home</h5>
+                </ion-tab-button>
+                <ion-tab-button tab="Book">
+                    <h5>Book</h5>
+                </ion-tab-button>
+                <ion-tab-button tab="Shelf">
+                    <h5>Shelf</h5>
+                </ion-tab-button>
+            </ion-tab-bar>
+        </ion-tabs>
     </ion-app>
 </body>

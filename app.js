@@ -1,65 +1,117 @@
-/* user will input a book title*/
-const searchBook = document.getElementById("inputBookTitle");
-const btnShowBooks = document.getElementById("btn-book-searches");
-btnShowBooks.addEventListener('click', getBooks);
+//Home Page
+const hNav = document.getElementById('home-nav');
+const hPage = document.getElementById('homePage');
+hNav.root = hPage;
+//Book Page - how the book viewer should have looked like
+const bNav = document.getElementById('book-nav');
+const bPage = document.getElementById('bookPage');
+bNav.root = bPage;
+//Shelf Page - this will hold saved books titles
+const shNAv = document.getElementById('shelf-nav');
+const shPage = document.getElementById('shelfPage');
+shNAv.root = shPage;
 
-//var img, title, author, genre, description;
+const searchBook = document.getElementById('inputBookTitle');/* user will input a book title*/
+const bBookResults = document.getElementById('btn-getBooks');
+const bSaveToSession = document.getElementById('saveSearch');
+const resultNumber = document.querySelector('#result-found');
+const storeSessionInput = sessionStorage.getItem('textInput');
+const bSaveToFavourites = document.getElementById('saveBook');
 
-function getBooks(){
-    const bookTerm = searchBook.value;
-    console.log("BUTTON PRESSED");
+let favBookCount;
+let booksArray = {};
 
-    getResults();
+bSaveToSession.addEventListener('click', saveInputToSession);
+bBookResults.addEventListener('click', getBooks);
+bSaveToFavourites.addEventListener('click', saveBookToShelf)
+
+const apiAddress = `https://openlibrary.org/search.json?q=`;
+
+function saveInputs(){/* this should save the input from the user and rember it for them */
+    sessionStorage.setItem('textInput', storageInput.value);
+    console.log("Saved to Session");
 }
 
-async function getResults(){
-    const apiURL = `https://www.googleapis.com/books/v1/volumes?q=${bookTerm}`;
-    console.log(bookTerm);
+function getBooks(){/* will get data from the API */
+    const bookTitle = searchBook.value;
+    const apiURL = `${apiAddress}${bookTitle}`;
     
-    try {
-        const response = await fetch(apiURL);
-        const json = await getJson(response);
-        updateDisplay(json);
-    } catch (error) {
-        reportError(error);
+    fetch(apiURL).then(getJson).then(buildResults).catch(anyErrors);
+    console.log("api works");
+}
+
+function getJson(){/* will get API Data and store in to a json file */
+    const theResponse = aResponse.json();
+    console.log(theResponse);
+    return theResponse;
+}
+
+ /* this should generate a new item box for every result that was found */
+function buildResults(jsonObj){
+    let dataGathered = jsonObj.results;
+
+    resultNumber.textContent = numFound;
+
+    class BookResults extends HTMLElement{
+        connectedCallback(){
+             this.innerHTML = `
+                 <ion-list>
+                    ${dataGathered.map(docs => `
+                    <ion-item button onclick="showBookDetails(`${docs.title}`)">
+                         <ion-label>
+                             <h2>${docs.title}</h2>
+                             <h3>${docs.author_name}</h3>
+                         </ion-label>
+                    </ion-item>
+                 `)/* end of function */.join('\n')}
+                 </ion-list>
+            `/* inner end */
+        }
     }
 }
 
-async function getJson(aResponse){
-    return aResponse.json();
+customElements.define('book-results', BookResults);
+const nav = document.querySelector('ion-nav');
+
+// should lead user to new page 
+ function showBookDetails(aTitle){
+    
+    let book = new Object;
+    
+    for (aBook of docs){
+         if(aBook.title == aTitle){
+             book = aBook;
+         }
+     }
+    
+      console.log(book.title);
+     nav.push("nav-detail", {book});
 }
 
-async function updateDisplay(jsonObj){
+function anyErrors(){/* will report any errors when fetching the API */
+    console.log(error);
+}
 
-    try {
-        const data = jsonObj;
-        console.log(jsonObj);
-    } catch (error) {
-        reportError(error);
+async function saveBookToShelf(aBook){// should build a new item in shelf page when a button is clicked
+
+    class BookResults extends HTMLElement{
+        
+        connectedCallback(){
+             this.innerHTML = `
+                 <ion-list>
+                    ${dataGathered.map(docs => `
+                    <ion-item button onclick="showBookDetails(`${docs.title}`)">
+                         <ion-label>
+                             <h2>${docs.title}</h2>
+                             <h3>${docs.author_name}</h3>
+                         </ion-label>
+                    </ion-item>
+                 `)/* end of function */.join('\n')}
+                 </ion-list>
+            `/* inner end */
+            favBookCount++;
+            const bookList = document.getElementById('bookSavedCounter');
+            bookList.value = favBookCount.value;
+        }
     }
 }
-
-async function reportError(anError){
-    console.log(anError);
-}
-
-// function getBooks(){
-    
-//     const apiURL = `https://www.googleapis.com/books/v1/volumes?q=`;
-//     fetch(apiURL).then(getJson).then(updateDisplay).catch(error);
-// }
-
-// function getJson(aResponse){
-//     const theResponse = aResponse.json();
-//     console.log(theResponse);
-//     return theResponse;
-// }
-
-// function updateDisplay(jsonObj){
-//     let bookNameSearched = searchBook.value;
-//     let bookObjArray = jsonObj.results;
-// }
-
-// function anyErrors(error){
-//      console.log(error);
-// }
